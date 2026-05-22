@@ -1,0 +1,141 @@
+.filter-card {
+  margin-bottom: 20rpx;
+}
+
+.search-row {
+  margin-bottom: 20rpx;
+}
+
+.search-input {
+  background: #f5f5f5;
+  border-radius: 10rpx;
+  padding: 16rpx 24rpx;
+  font-size: 28rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.year-tabs {
+  white-space: nowrap;
+}
+
+.year-tab {
+  display: inline-block;
+  padding: 12rpx 28rpx;
+  border-radius: 40rpx;
+  font-size: 26rpx;
+  color: #666;
+  background: #f5f5f5;
+  margin-right: 16rpx;
+}
+
+.year-tab.active {
+  background: #1565C0;
+  color: #fff;
+}
+
+.stat-row {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.stat-card {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx;
+}
+
+.stat-num {
+  display: block;
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #1565C0;
+}
+
+.stat-label {
+  display: block;
+  font-size: 24rpx;
+  color: #888;
+  margin-top: 8rpx;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80rpx 32rpx;
+}
+
+.empty-icon {
+  display: block;
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.record-card {
+  margin-bottom: 20rpx;
+  cursor: pointer;
+}
+
+.record-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+
+.record-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #222;
+}
+
+.tag {
+  font-size: 22rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  font-weight: 500;
+}
+
+.tag-national {
+  background: #FFF3E0;
+  color: #E65100;
+}
+
+.tag-province {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+
+.tag-other {
+  background: #E3F2FD;
+  color: #1565C0;
+}
+
+.record-title {
+  display: block;
+  font-size: 28rpx;
+  color: #444;
+  margin-bottom: 16rpx;
+  line-height: 1.5;
+}
+
+.record-meta {
+  display: flex;
+  gap: 20rpx;
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  font-size: 24rpx;
+  color: #888;
+}
+
+.meta-item.date {
+  margin-left: auto;
+  color: #bbb;
+}

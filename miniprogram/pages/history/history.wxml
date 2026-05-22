@@ -1,0 +1,53 @@
+<view class="container">
+  <!-- 搜索和筛选栏 -->
+  <view class="filter-card card">
+    <view class="search-row">
+      <input class="search-input" placeholder="搜索姓名/赛项/老师..." value="{{searchKeyword}}" bindinput="onSearch"/>
+    </view>
+    <scroll-view scroll-x class="year-tabs">
+      <view class="year-tab {{activeYear === '' ? 'active' : ''}}" bindtap="filterYear" data-year="">全部</view>
+      <view
+        wx:for="{{yearList}}"
+        wx:key="*this"
+        class="year-tab {{activeYear === item ? 'active' : ''}}"
+        bindtap="filterYear"
+        data-year="{{item}}"
+      >{{item}}年</view>
+    </scroll-view>
+  </view>
+
+  <!-- 统计小卡片 -->
+  <view class="stat-row">
+    <view class="stat-card card">
+      <text class="stat-num">{{totalCount}}</text>
+      <text class="stat-label">总记录</text>
+    </view>
+    <view class="stat-card card">
+      <text class="stat-num">{{filteredList.length}}</text>
+      <text class="stat-label">当前筛选</text>
+    </view>
+  </view>
+
+  <!-- 列表 -->
+  <view wx:if="{{filteredList.length === 0}}" class="empty-state card">
+    <text class="empty-icon">📋</text>
+    <text class="empty-text">暂无记录</text>
+  </view>
+
+  <view wx:for="{{filteredList}}" wx:key="_id" class="record-card card" bindtap="viewDetail" data-id="{{item._id}}">
+    <view class="record-header">
+      <text class="record-name">{{item.学生姓名 || '未知学生'}}</text>
+      <view class="tag {{item.级别 === '国家级' ? 'tag-national' : item.级别 === '省级' ? 'tag-province' : 'tag-other'}}">
+        {{item.级别 || '未知级别'}}
+      </view>
+    </view>
+    <text class="record-title">{{item.赛项名称 || '未填写赛项'}}</text>
+    <view class="record-meta">
+      <text class="meta-item">{{item.名次 || ''}}</text>
+      <text wx:if="{{item.指导老师}}" class="meta-item">指导：{{item.指导老师}}</text>
+      <text class="meta-item date">{{item.获奖年月 || item.上传日期}}</text>
+    </view>
+  </view>
+
+  <view style="height: 40rpx;"></view>
+</view>

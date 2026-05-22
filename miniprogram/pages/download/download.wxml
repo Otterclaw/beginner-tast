@@ -1,0 +1,66 @@
+<view class="container">
+  <view class="card intro-card">
+    <text class="intro-title">导出获奖信息Excel</text>
+    <text class="intro-desc">导出的Excel将按年份分Sheet，格式与你设定的列结构一致</text>
+  </view>
+
+  <!-- 导出选项 -->
+  <view class="card option-card">
+    <text class="option-label">选择导出范围</text>
+    <view class="option-row">
+      <view
+        class="option-item {{exportMode === 'all' ? 'active' : ''}}"
+        bindtap="setMode"
+        data-mode="all"
+      >
+        <text class="option-icon">📊</text>
+        <text class="option-text">全部数据</text>
+      </view>
+      <view
+        class="option-item {{exportMode === 'year' ? 'active' : ''}}"
+        bindtap="setMode"
+        data-mode="year"
+      >
+        <text class="option-icon">📅</text>
+        <text class="option-text">指定年份</text>
+      </view>
+    </view>
+
+    <view wx:if="{{exportMode === 'year'}}" class="year-select-row">
+      <picker mode="selector" range="{{yearList}}" bindchange="onYearChange">
+        <view class="picker-btn">
+          <text>{{selectedYear ? selectedYear + '年' : '请选择年份'}}</text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- Excel列预览 -->
+  <view class="card preview-card">
+    <text class="preview-title">Excel列结构预览</text>
+    <scroll-view scroll-x class="col-scroll">
+      <view class="col-list">
+        <view wx:for="{{columnNames}}" wx:key="*this" class="col-chip">{{item}}</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 导出按钮 -->
+  <button
+    class="btn-primary export-btn"
+    bindtap="exportExcel"
+    loading="{{exporting}}"
+    disabled="{{exporting}}"
+  >
+    {{exporting ? '生成中...' : '生成并下载Excel'}}
+  </button>
+
+  <view wx:if="{{lastExportUrl}}" class="result-card card">
+    <text class="result-title">Excel已生成</text>
+    <text class="result-hint">点击下方按钮保存或分享文件</text>
+    <button class="btn-secondary save-file-btn" bindtap="saveFile">保存到手机</button>
+  </view>
+
+  <view style="height: 40rpx;"></view>
+</view>

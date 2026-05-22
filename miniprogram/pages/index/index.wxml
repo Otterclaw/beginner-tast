@@ -1,0 +1,42 @@
+<view class="container">
+  <view class="header card">
+    <text class="title">证书识别归档</text>
+    <text class="subtitle">拍摄或上传获奖证书，自动提取信息</text>
+  </view>
+
+  <!-- 上传区域 -->
+  <view class="upload-card card" bindtap="{{loading ? '' : 'chooseImage'}}">
+    <image wx:if="{{imageUrl}}" src="{{imageUrl}}" class="preview-image" mode="aspectFit"/>
+    <view wx:else class="upload-placeholder">
+      <text class="upload-icon">📷</text>
+      <text class="upload-text">点击上传证书图片</text>
+      <text class="upload-hint">支持拍照或从相册选择</text>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view wx:if="{{imageUrl}}" class="action-row">
+    <button class="btn-secondary flex1" bindtap="chooseImage" disabled="{{loading}}">重新选择</button>
+    <view class="gap"></view>
+    <button class="btn-primary flex1" bindtap="startOCR" loading="{{loading}}" disabled="{{loading}}">
+      {{loading ? '识别中...' : '开始识别'}}
+    </button>
+  </view>
+
+  <!-- 进度提示 -->
+  <view wx:if="{{loading}}" class="loading-card card">
+    <text class="loading-step">{{loadingText}}</text>
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{progress}}%"></view>
+    </view>
+  </view>
+
+  <!-- 提示说明 -->
+  <view class="tips-card card">
+    <text class="tips-title">拍摄建议</text>
+    <text class="tips-item">• 证书平铺拍摄，保持正对镜头</text>
+    <text class="tips-item">• 光线均匀，避免强光反射和阴影</text>
+    <text class="tips-item">• 确保文字清晰，避免模糊</text>
+    <text class="tips-item">• 识别结果可手动修改后再保存</text>
+  </view>
+</view>

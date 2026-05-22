@@ -1,0 +1,141 @@
+<view class="container">
+  <view class="tip-bar">
+    <text class="tip-text">请核对以下识别结果，可直接修改后保存</text>
+  </view>
+
+  <!-- 证书图片缩略图 -->
+  <view class="card thumb-card" wx:if="{{imageUrl}}">
+    <image src="{{imageUrl}}" class="thumb" mode="aspectFit" bindtap="previewImage"/>
+    <text class="thumb-hint">点击查看原图</text>
+  </view>
+
+  <!-- 表单 -->
+  <view class="card form-card">
+    <text class="form-section-title">基本信息</text>
+
+    <view class="field-row">
+      <text class="field-label required">获奖年月</text>
+      <input class="field-input" placeholder="如 2025.5" value="{{form.获奖年月}}" data-key="获奖年月" bindinput="onInput"/>
+    </view>
+
+    <view class="field-row">
+      <text class="field-label required">赛项名称</text>
+      <input class="field-input" placeholder="比赛完整名称" value="{{form.赛项名称}}" data-key="赛项名称" bindinput="onInput"/>
+    </view>
+
+    <view class="field-row">
+      <text class="field-label">主办单位</text>
+      <input class="field-input" placeholder="颁奖机构或主办方" value="{{form.主办单位}}" data-key="主办单位" bindinput="onInput"/>
+    </view>
+
+    <view class="field-row">
+      <text class="field-label">项目类型</text>
+      <picker mode="selector" range="{{projectTypes}}" bindchange="onPickerChange" data-key="项目类型">
+        <view class="picker-view">
+          <text class="{{form.项目类型 ? 'picker-text' : 'picker-placeholder'}}">
+            {{form.项目类型 || '请选择项目类型'}}
+          </text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="field-row">
+      <text class="field-label required">级别</text>
+      <picker mode="selector" range="{{levelOptions}}" bindchange="onPickerChange" data-key="级别">
+        <view class="picker-view">
+          <text class="{{form.级别 ? 'picker-text' : 'picker-placeholder'}}">
+            {{form.级别 || '请选择级别'}}
+          </text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="field-row">
+      <text class="field-label">类别</text>
+      <input class="field-input" placeholder="如 A、B 等" value="{{form.类别}}" data-key="类别" bindinput="onInput"/>
+    </view>
+
+    <view class="field-row">
+      <text class="field-label required">名次</text>
+      <picker mode="selector" range="{{rankOptions}}" bindchange="onPickerChange" data-key="名次">
+        <view class="picker-view">
+          <text class="{{form.名次 ? 'picker-text' : 'picker-placeholder'}}">
+            {{form.名次 || '请选择名次/奖项'}}
+          </text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="card form-card">
+    <text class="form-section-title">人员信息</text>
+
+    <view class="field-row">
+      <text class="field-label required">学生姓名</text>
+      <input class="field-input" placeholder="多人用顿号分隔" value="{{form.学生姓名}}" data-key="学生姓名" bindinput="onInput"/>
+    </view>
+
+    <view class="field-row">
+      <text class="field-label">指导老师</text>
+      <input class="field-input" placeholder="多人用顿号分隔" value="{{form.指导老师}}" data-key="指导老师" bindinput="onInput"/>
+    </view>
+
+    <view class="field-row">
+      <text class="field-label">本/专科</text>
+      <picker mode="selector" range="{{eduTypes}}" bindchange="onPickerChange" data-key="本专科">
+        <view class="picker-view">
+          <text class="{{form.本专科 ? 'picker-text' : 'picker-placeholder'}}">
+            {{form.本专科 || '请选择'}}
+          </text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="field-row">
+      <text class="field-label">学院名称</text>
+      <input class="field-input" placeholder="所属学院" value="{{form.学院名称}}" data-key="学院名称" bindinput="onInput"/>
+    </view>
+
+    <view class="field-row">
+      <text class="field-label">专业名称</text>
+      <input class="field-input" placeholder="获奖学生所属专业" value="{{form.专业名称}}" data-key="专业名称" bindinput="onInput"/>
+    </view>
+  </view>
+
+  <view class="card form-card">
+    <text class="form-section-title">其他信息</text>
+
+    <view class="field-row">
+      <text class="field-label">教育部认定</text>
+      <picker mode="selector" range="{{yesNoOptions}}" bindchange="onPickerChange" data-key="是否教育部认定">
+        <view class="picker-view">
+          <text class="{{form.是否教育部认定 ? 'picker-text' : 'picker-placeholder'}}">
+            {{form.是否教育部认定 || '请选择'}}
+          </text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="field-row">
+      <text class="field-label">证书编号</text>
+      <input class="field-input" placeholder="证书上的编号（如有）" value="{{form.证书编号}}" data-key="证书编号" bindinput="onInput"/>
+    </view>
+
+    <view class="field-row field-readonly">
+      <text class="field-label">上传日期</text>
+      <text class="field-value-readonly">{{form.上传日期}}</text>
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <button class="btn-primary save-btn" bindtap="saveRecord" loading="{{saving}}" disabled="{{saving}}">
+    {{saving ? '保存中...' : '确认保存'}}
+  </button>
+
+  <view style="height: 60rpx;"></view>
+</view>
