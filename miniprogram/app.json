@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/result/result",
     "pages/history/history",
-    "pages/download/download"
+    "pages/download/download",
+    "pages/blocked/blocked"
   ],
   "window": {
     "backgroundTextStyle": "dark",

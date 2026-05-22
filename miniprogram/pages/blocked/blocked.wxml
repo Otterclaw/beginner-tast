@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="card">
+    <text class="icon">🔒</text>
+    <text class="title">暂无访问权限</text>
+    <text class="desc">此小程序仅限授权用户使用。</text>
+    <text class="desc">请联系管理员申请权限。</text>
+    <view class="divider"></view>
+    <text class="contact-label">管理员联系方式</text>
+    <text class="contact-value">请通过微信联系管理员</text>
+  </view>
+</view>
